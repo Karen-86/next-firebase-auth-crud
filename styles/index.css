@@ -1,0 +1,6 @@
+/* PARTIALS */
+@import "../app/globals.css";
+@import "./partials/lazy-load.css";
+
+/* COMPONENTS */
+

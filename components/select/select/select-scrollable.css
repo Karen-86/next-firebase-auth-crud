@@ -1,0 +1,18 @@
+/* .select-scrollable-trigger {
+  .select-scrollable-item-inner {
+    max-width: 230px;
+  }
+  .select-scrollable-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.select-scrollable-content {
+  .select-scrollable-item {
+    & > span:nth-of-type(2) {
+      flex: 1;
+    }
+  }
+} */
