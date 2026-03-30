@@ -11,7 +11,7 @@ import { Card, CardHeader } from "@/components/ui/card"
 import { LOCAL_DATA } from "@/constants/index"
 import { Section } from "@/modules/sections/types"
 import { useSectionStore } from "@/modules/sections/store"
-import useAlert from "@/hooks/useAlert"
+import {successAlert, errorAlert, warningAlert} from '@/lib/utils/alert'
 
 const { placeholderImage } = LOCAL_DATA.images
 
@@ -32,8 +32,6 @@ const Template = () => {
   const isSectionLoading = useSectionStore((s) => s.isSectionLoading)
   const isSectionCreating = useSectionStore((s) => s.isSectionCreating)
   const isSectionUpdating = useSectionStore((s) => s.isSectionUpdating)
-
-  const { successAlert, errorAlert, warningAlert } = useAlert()
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({

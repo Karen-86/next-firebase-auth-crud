@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react"
 import { DialogDemo, ButtonDemo, InputDemo } from "@/components/index"
 import { useBlogStore } from "@/modules/blogs/store"
-import useAlert from "@/hooks/useAlert"
+import {successAlert, errorAlert, warningAlert} from '@/lib/utils/alert'
 
 export default function DeleteBlogDialog({ blogId = "" }) {
   return (
@@ -27,7 +27,6 @@ export default function DeleteBlogDialog({ blogId = "" }) {
 const DeleteBlogDialogContent = ({ blogId = "", closeDialog = () => {} }) => {
   const deleteBlogAsync = useBlogStore((s) => s.deleteBlogAsync)
   const isBlogDeleting = useBlogStore((s) => s.isBlogDeleting)
-  const { successAlert, errorAlert, warningAlert } = useAlert()
 
   const onDelete = (e: any) => {
     e.preventDefault()

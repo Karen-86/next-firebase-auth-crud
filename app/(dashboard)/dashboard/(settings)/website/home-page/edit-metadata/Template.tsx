@@ -10,7 +10,7 @@ import {
 import { Card, CardHeader } from "@/components/ui/card"
 import { Page } from "@/modules/pages/types"
 import { usePageStore } from "@/modules/pages/store"
-import useAlert from "@/hooks/useAlert"
+import {successAlert, errorAlert, warningAlert} from '@/lib/utils/alert'
 
 const Template = () => {
   const [state, setState] = useState<Page>({
@@ -29,8 +29,6 @@ const Template = () => {
   const isPageLoading = usePageStore((s) => s.isPageLoading)
   const isPageCreating = usePageStore((s) => s.isPageCreating)
   const isPageUpdating = usePageStore((s) => s.isPageUpdating)
-
-  const { successAlert, errorAlert, warningAlert } = useAlert()
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({

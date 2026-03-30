@@ -51,8 +51,8 @@ export default function Navbar() {
             {authUser ? (
               <NavUserDemo triggerClassName=" rounded-full! h-10 w-10 [&_.user-details]:hidden" />
             ) : (
-              <Link href={`/sign-up`}>
-                <ButtonDemo variant="ghost" text={`Sign Up`} />
+              <Link href={`/sign-in`}>
+                <ButtonDemo variant="ghost" text={`Sign In`} />
               </Link>
             )}
           </div>

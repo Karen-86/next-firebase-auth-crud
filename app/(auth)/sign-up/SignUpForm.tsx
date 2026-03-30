@@ -3,29 +3,23 @@
 import React, { useEffect, useState } from "react";
 import { ButtonDemo, InputDemo } from "@/components/index";
 import Link from "next/link";
-import {LOCAL_DATA} from "@/constants/index";
-import useJoiValidation from "@/hooks/useJoiValidation";
+import { LOCAL_DATA } from "@/constants/index";
+
+import { validateSignUp } from "@/modules/auth/validation"
+import { ValidationResult } from "joi"
+import type { SignUpData } from "@/modules/auth/types"
+
 import { useAuthActions } from "@/modules/auth/hooks/useAuthActions";
 
 const { googleLogoIcon } = LOCAL_DATA.images;
 
-type ValidationResult = {
-  error?: {
-    details: {
-      path: string[];
-      message: string;
-    }[];
-  };
-};
-
 const SignUpForm = () => {
-  const [state, setState] = useState({ name: "", email: "", password: "", repeatPassword: "" });
+  const [state, setState] = useState<SignUpData>({ name: "", email: "", password: "", repeatPassword: "" });
   const [isLoading, setIsLoading] = useState(false);
   const {handleSignInWithGoogle, handleSignUp} = useAuthActions()
 
-  const { validateSignUp } = useJoiValidation();
   const [wasSubmitted, setWasSubmitted] = useState(false);
-  const [result, setResult] = useState<ValidationResult>({});
+  const [result, setResult] = useState<ValidationResult>();
   const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

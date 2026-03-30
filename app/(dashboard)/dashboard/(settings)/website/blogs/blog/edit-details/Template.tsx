@@ -16,7 +16,7 @@ import DeleteBlogDialog from "./delete-blog-dialog/DeleteBlogDialog"
 import { initialValue } from "@/components/rich-text-editor/RichTextEditorDemo"
 import { Blog } from "@/modules/blogs/types"
 import { useBlogStore } from "@/modules/blogs/store"
-import useAlert from "@/hooks/useAlert"
+import {successAlert, errorAlert, warningAlert} from '@/lib/utils/alert'
 import { useAuthStore } from "@/modules/auth/store"
 
 const { placeholderImage } = LOCAL_DATA.images
@@ -132,7 +132,6 @@ const BlogItem = ({ blogItem = {}, filteredBlogs = [] }: any) => {
     editorState: null,
     images: [],
   })
-  const { successAlert, errorAlert, warningAlert } = useAlert()
 
   const isBlogCreating = useBlogStore((s) => s.isBlogCreating)
   const isBlogUpdating = useBlogStore((s) => s.isBlogUpdating)

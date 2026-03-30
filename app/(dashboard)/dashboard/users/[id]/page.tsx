@@ -11,16 +11,15 @@ import { useAuthStore } from "@/modules/auth/store";
 import ProfileHeader from "./profile-header/ProfileHeader";
 import { useUserStore } from "@/modules/users/store";
 
-const {} = LOCAL_DATA.images;
-
-const {} = LOCAL_DATA.images;
+const {notFoundImage} = LOCAL_DATA.images;
 
 const Page = () => {
   const params = useParams();
   const userId = params.id;
 
   const getTargetUserAsync = useUserStore(s=>s.getTargetUserAsync)
-  const user = useAuthStore(s=>s.user)
+  const targetUser = useUserStore(s=>s.targetUser)
+  const authUser = useAuthStore(s=>s.authUser)
 
   useEffect(() => {
     if (!userId) return;
@@ -33,13 +32,13 @@ const Page = () => {
       label: "Dashboard",
     },
     {
-      label: `Profile (${user.displayName})`,
+      label: `Profile (${targetUser.displayName})`,
     },
   ];
-  if (userId === user?.id) {
+  if (authUser?.uid === targetUser?.id) {
     return (
       <main>
-        <img className="max-w-[300px]" src="" alt="" />
+        <img className="max-w-[300px]" src={notFoundImage} alt="" />
       </main>
     );
   }
@@ -53,8 +52,8 @@ const Page = () => {
       <br />
       <Card className="mb-[150px] min-h-[500px] relative">
         <CardContent>
-          <ProfileHeader details={user} />
-          <UserInfoBlock details={user} />
+          <ProfileHeader details={targetUser} />
+          <UserInfoBlock details={targetUser} />
         </CardContent>
       </Card>
     </main>
@@ -65,7 +64,7 @@ const Page = () => {
 const UserInfoBlock = ({ details = {} }: { details: any }) => {
 
 
-  const user = useAuthStore(s=>s.user)
+  const targetUser = useUserStore(s=>s.targetUser)
   return (
     <div className="relative py-5">
       <Separator title="Details" className="mb-3" titleClassName="bg-white" />
@@ -79,7 +78,7 @@ const UserInfoBlock = ({ details = {} }: { details: any }) => {
           <div className="flex items-center justify-between text-sm gap-5 py-1 px-3 border-b-1 border-dashed border-input  mb-3">
             <div className="font-bold">Email:</div>
             <div>
-              {(details.email && user.roles?.some(role => ["admin", "superAdmin"].includes(role)) && details.email) || "***"}
+              {(details.email && targetUser.roles?.some(role => ["admin", "superAdmin"].includes(role)) && details.email) || "***"}
             </div>
           </div>
         </div>

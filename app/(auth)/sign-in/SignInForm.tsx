@@ -4,29 +4,24 @@ import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { ButtonDemo, InputDemo } from "@/components/index"
 import { LOCAL_DATA } from "@/constants/index"
-import useAlert from "@/hooks/useAlert"
-import useJoiValidation from "@/hooks/useJoiValidation"
+
+import { validateSignIn } from "@/modules/auth/validation"
+import { ValidationResult } from "joi"
+import type { SignInData } from "@/modules/auth/types"
+
 import { useAuthActions } from "@/modules/auth/hooks/useAuthActions"
 const { googleLogoIcon } = LOCAL_DATA.images
 import { useSignOutAlerts } from "@/hooks/useSignOutAlert"
 
-type ValidationResult = {
-  error?: {
-    details: {
-      path: string[]
-      message: string
-    }[]
-  }
-}
-
 const SignInForm = () => {
-  const [state, setState] = useState({ email: "", password: "" })
-  const { successAlert, errorAlert } = useAlert()
+  const [state, setState] = useState<SignInData>({
+    email: "",
+    password: "",
+  })
   const { handleSignIn, handleSignInWithGoogle } = useAuthActions()
   const [isLoading, setIsLoading] = useState(false)
-  const { validateSignIn } = useJoiValidation()
   const [wasSubmitted, setWasSubmitted] = useState(false)
-  const [result, setResult] = useState<ValidationResult>({})
+  const [result, setResult] = useState<ValidationResult>()
   const [errorMessages, setErrorMessages] = useState<Record<string, string>>({})
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,13 +48,14 @@ const SignInForm = () => {
     if (!wasSubmitted) return
     const errors: Record<string, string> = {}
     result?.error?.details.forEach((item) => {
-      if (errors[item.path[0]]) return
-      errors[item.path[0]] = item.message
+      const key = String(item.path[0])
+      if (errors[key]) return
+      errors[key] = item.message
     })
     setErrorMessages(errors)
   }, [result, wasSubmitted])
 
-    useSignOutAlerts()
+  useSignOutAlerts()
 
   return (
     <div>
@@ -89,7 +85,10 @@ const SignInForm = () => {
             inputClassName={errorMessages.password ? "is-invalid" : "is-valid"}
           />
 
-          <Link href="/forgot-password" className="mb-3 inline-block text-xs text-blue-400 hover:underline">
+          <Link
+            href="/forgot-password"
+            className="mb-3 inline-block text-xs text-blue-400 hover:underline"
+          >
             Forgot Password
           </Link>
 

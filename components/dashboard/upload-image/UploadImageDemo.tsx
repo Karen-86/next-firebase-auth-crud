@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import useUtil from "@/hooks/useUtil";
 import { Label } from "@/components/ui/label";
+import  {compressImage, convertToBase64} from '@/lib/utils/imageUtils'
 
 export default function UploadImage({
   id = "",
@@ -11,8 +11,6 @@ export default function UploadImage({
   setState =()=>{},
 }:any) {
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
-
-  const { compressImage, convertToBase64 } = useUtil();
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {

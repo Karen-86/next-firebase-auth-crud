@@ -5,7 +5,7 @@ const loadUser = async ({ decoded = {} }: { decoded: any }) => {
   const userRef = db.collection("users").doc(decoded.uid);
   const userSnap = await userRef.get();
 
-  if (!userSnap.exists) throw createError("User not found", 404);
+  if (!userSnap.exists) throw createError("Session expired or user no longer exists", 401);
   const userData = { id: userSnap.id, ...userSnap.data() };
 
   const req:any = {

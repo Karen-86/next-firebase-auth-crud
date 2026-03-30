@@ -3,6 +3,7 @@ import type { User } from "firebase/auth"
 import type { UserResponse } from "@/modules/users/types"
 import * as authApi from "@/modules/auth/api"
 import * as bannersApi from "@/modules/banners/api"
+import { useBannerStore } from "@/modules/banners/store"
 
 const noop = () => {}
 
@@ -15,7 +16,7 @@ type AuthStore = {
   setIsUserLoading: (_: boolean) => void
   setAuthUser: (_: any) => void
   getProfileAsync: (params?: any) => Promise<void>
-  reset: ()=>void
+  reset: () => void
 }
 
 export const useAuthStore = create<AuthStore>((set, get) => ({
@@ -36,12 +37,15 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
 
       const [userData, mediaData] = await Promise.all([
         authApi.getProfile(),
-        bannersApi.getBanners({ userId: authUser?.uid }),
+        bannersApi.getBanner({ id: authUser?.uid }),
       ])
 
       if (!userData.success) return errorCB(userData.message)
-      console.log({ ...userData.data, banner: mediaData.data[0] }, " =getProfileAsync=")
-      set({ user: { ...userData.data, banner: mediaData.data[0] } })
+      console.log(userData.data, " =getProfileAsync=")
+      set({ user: {...userData.data, banner: mediaData.data} })
+
+      // mediaData.data && useBannerStore.getState().setBanner(mediaData.data)
+
       successCB(userData.message)
     } finally {
       set({ isUserLoading: false })
@@ -50,7 +54,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
 
   reset: () => {
     set({
-      authUser: undefined, 
+      authUser: undefined,
       user: {},
       isUserLoading: false,
       isAuthUserLoading: false,

@@ -2,20 +2,13 @@
 
 import React, { useEffect, useState } from "react"
 import { ButtonDemo, InputDemo, BreadcrumbDemo, DialogDemo, DeleteUserDialog } from "@/components/index"
-import useJoiValidation from "@/hooks/useJoiValidation"
 import { useAuthActions } from "@/modules/auth/hooks/useAuthActions"
 import { useAuthStore } from "@/modules/auth/store"
-import useAlert from "@/hooks/useAlert"
+import { validateAddPassword } from '@/modules/auth/validation'
+import { ValidationResult } from "joi";
+import type { AddPasswordData } from "@/modules/auth/types";
 
-// ADD PASSWORD
-type ValidationResult = {
-  error?: {
-    details: {
-      path: string[]
-      message: string
-    }[]
-  }
-}
+
 
 const AddPasswordDialog = () => {
   return (
@@ -28,19 +21,16 @@ const AddPasswordDialog = () => {
   )
 }
 const AddPasswordContent = ({ closeDialog = () => {} }) => {
-  const [state, setState] = useState({ password: "", repeatPassword: "" })
+  const [state, setState] = useState<AddPasswordData>({ password: "", repeatPassword: "" })
   const [isLoading, setIsLoading] = useState(false)
 
   const { handleLinkEmailPasswordAccount, handleSignOut } = useAuthActions()
 
   const authUser = useAuthStore((s) => s.authUser)
 
-  const { validateAddPassword } = useJoiValidation()
   const [wasSubmitted, setWasSubmitted] = useState(false)
-  const [result, setResult] = useState<ValidationResult>({})
+  const [result, setResult] = useState<ValidationResult>()
   const [errorMessages, setErrorMessages] = useState<Record<string, string>>({})
-
-  const { successAlert } = useAlert()
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({

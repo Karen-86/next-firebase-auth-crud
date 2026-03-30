@@ -2,8 +2,7 @@
 
 import React from "react";
 import { ButtonDemo,  DialogDemo, CropDemo } from "@/components/index";
-import useUtil from "@/hooks/useUtil";
-import {LOCAL_DATA} from "@/constants/index";
+import  { resizeBase64Image} from '@/lib/utils/imageUtils'
 
 
 // AVATAR DIALOG
@@ -21,7 +20,7 @@ const CropAvatarDialog = ({
   return (
     <DialogDemo
       callback={callback}
-      contentClassName="sm:max-w-[600px] py-4 pt-6"
+      contentClassName="sm:max-w-[600px] py-4 pt-6 max-h-[100vh] overflow-y-auto"
       isDialogOpened={src ? true : false}
       trigger={<div className="hidden">hidden</div>}
     >
@@ -47,7 +46,6 @@ const CropAvatarDialogContent = ({
   setCroppedImageSrc = (_: any) => {},
   setState = (_: any) => {},
 }) => {
-  const { resizeBase64Image } = useUtil();
 
   function getBase64ImageSize(base64String: any) {
     const padding = base64String.endsWith("==") ? 2 : base64String.endsWith("=") ? 1 : 0;

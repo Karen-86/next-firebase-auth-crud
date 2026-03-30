@@ -17,9 +17,9 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ sect
     const decoded = await isAuthenticatedMiddleware(req);
 
     const { sectionId } = await params;
-    const { resourceData: sectionData } = await loadResourceMiddleware({
+    const {  section } = await loadResourceMiddleware({
       id: sectionId,
-      documentName: "section",
+      reqKey: "section",
       collectionName: "sections",
     });
 
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ sect
       {
         success: true,
         message: "section found successfully",
-        data: sectionData,
+        data: section,
       },
       { status: 200 },
     );
@@ -89,9 +89,9 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ se
     const isAllowed = allowRolesMiddleware({ userRoles: user.roles, allowedRoles: ["admin", "superAdmin"] });
     
     const { sectionId } = await params;
-    const { resourceRef: sectionRef } = await loadResourceMiddleware({
+    const { sectionRef } = await loadResourceMiddleware({
       id: sectionId,
-      documentName: "section",
+      reqKey: "section",
       collectionName: "sections",
     });
 

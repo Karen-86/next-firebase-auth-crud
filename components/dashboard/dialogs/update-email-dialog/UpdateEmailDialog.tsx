@@ -2,18 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { ButtonDemo, InputDemo, BreadcrumbDemo, DialogDemo, TooltipDemo, CropAvatarDialog } from "@/components/index";
-import useJoiValidation from "@/hooks/useJoiValidation";
 import { useAuthActions } from "@/modules/auth/hooks/useAuthActions";
 
-// UPDATE EMAIL
-type ValidationResult = {
-  error?: {
-    details: {
-      path: string[];
-      message: string;
-    }[];
-  };
-};
+import { validateUpdateEmail } from '@/modules/auth/validation'
+import { ValidationResult } from "joi";
+import type { UpdateEmailData } from "@/modules/auth/types";
 
 const UpdateEmailDialog = () => {
   return (
@@ -24,13 +17,12 @@ const UpdateEmailDialog = () => {
 };
 
 const UpdateEmailContent = ({ closeDialog = () => {} }) => {
-  const [state, setState] = useState({ email: "" });
+  const [state, setState] = useState<UpdateEmailData>({ email: "" });
   const [isLoading, setIsLoading] = useState(false);
   const {handleUpdateEmail} = useAuthActions()
 
-  const { validateUpdateEmail } = useJoiValidation();
   const [wasSubmitted, setWasSubmitted] = useState(false);
-  const [result, setResult] = useState<ValidationResult>({});
+  const [result, setResult] = useState<ValidationResult>();
   const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

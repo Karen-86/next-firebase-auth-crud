@@ -1,8 +1,7 @@
 import { useEffect } from "react"
-import useAlert from "@/hooks/useAlert"
+import {successAlert, errorAlert, warningAlert} from '@/lib/utils/alert'
 
 export const useSignOutAlerts = () => {
-  const { successAlert, errorAlert } = useAlert()
 
   useEffect(() => {
     if (typeof window === "undefined") return

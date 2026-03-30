@@ -39,13 +39,6 @@ export type Payment = {
   data?: any;
 };
 
-
-const formatWithCommas = (value: string) => {
-  const num = value.replace(/,/g, "");
-  if (!/^\d+$/.test(num)) return value;
-  return Number(num).toLocaleString();
-};
-
 export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "index",

@@ -1,6 +1,6 @@
 import { useAuthStore } from "@/modules/auth/store"
 import { useUserStore } from "@/modules/users/store"
-import useAlert from "@/hooks/useAlert"
+import {successAlert, errorAlert, warningAlert} from '@/lib/utils/alert'
 
 import {
   signInWithEmailAndPassword,
@@ -33,8 +33,6 @@ export const useAuthActions = () => {
   const getProfileAsync = useAuthStore((s) => s.getProfileAsync)
   const setAuthUser = useAuthStore((s) => s.setAuthUser)
   const getUsersAsync = useUserStore((s) => s.getUsersAsync)
-
-  const { errorAlert, successAlert, warningAlert } = useAlert()
 
   const handleSignUp = async ({ name = "", email = "", password = "", setIsLoading = (_: boolean) => {} }) => {
     setIsLoading(true)

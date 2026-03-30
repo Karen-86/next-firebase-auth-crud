@@ -8,7 +8,7 @@ import {
   SelectDemo,
   // SelectScrollable
 } from "@/components/index"
-import useAlert from "@/hooks/useAlert"
+import {successAlert, errorAlert, warningAlert} from '@/lib/utils/alert'
 
 import { DropdownMenuCheckboxes } from "@/components/index.js"
 import { ChevronDown } from "lucide-react"
@@ -38,8 +38,6 @@ const SetupUserDialogContent = ({ user = {}, closeDialog = () => {} }: { user: a
   })
 
   const [defaultRoles, setDefaultRoles] = useState<any>([])
-
-  const {successAlert, warningAlert } = useAlert()
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setState((prev) => ({

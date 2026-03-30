@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
       uid: decoded.uid,
       email: decoded.email,
       photoURL: body.photoURL || "",
-      displayName: body.displayName || "",
+      displayName: body.displayName || "user_" + Math.random().toString(36).substring(2, 8),
       roles: ["user"],
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),

@@ -10,7 +10,7 @@ const page = () => {
       <nav className="absolute top-0 left-0 py-3 w-full">
         <div className="container">
           <Link href="/">
-            <ButtonDemo variant="ghostStrong"  text="Back" startIcon={<ChevronLeft />} />
+            <ButtonDemo variant="ghostStrong"  text="Home" startIcon={<ChevronLeft />} />
           </Link>
         </div>
       </nav>

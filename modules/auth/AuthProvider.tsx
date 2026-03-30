@@ -4,7 +4,6 @@ import { ReactNode, useEffect, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { onAuthStateChanged, User } from "firebase/auth"
 import { auth } from "@/lib/firebase/config/firebaseClient"
-import useAlert from "@/hooks/useAlert"
 import { LoadingScreen } from "@/components/loading-screen/LoadingScreen"
 import useAutoLogout from "@/hooks/useAutoLogout"
 import { useAuthStore } from "@/modules/auth/store"
@@ -23,8 +22,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const setAuthUser = useAuthStore((s) => s.setAuthUser)
   const authUser = useAuthStore((s) => s.authUser)
   const user = useAuthStore((s) => s.user)
-
-  const { successAlert } = useAlert()
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => setAuthUser(user))

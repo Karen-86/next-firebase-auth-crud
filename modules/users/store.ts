@@ -8,7 +8,7 @@ const noop = () => {}
 
 type UserStore = {
   users: UserResponse[]
-  targetUser: UserResponse | null
+  targetUser: UserResponse
   isTargetUserLoading: boolean
   isUsersLoading: boolean
   isTargetUserUpdating: boolean
@@ -23,7 +23,7 @@ type UserStore = {
 
 export const useUserStore = create<UserStore>((set, get) => ({
   users: [],
-  targetUser: null,
+  targetUser: {},
   isTargetUserLoading: false,
   isUsersLoading: false,
   isTargetUserUpdating: false,
@@ -52,13 +52,13 @@ export const useUserStore = create<UserStore>((set, get) => ({
     try {
       const [userData, mediaData] = await Promise.all([
         usersApi.getUser({ id: userId }),
-        bannersApi.getBanners({ userId }),
+        bannersApi.getBanner({ id: userId }),
       ])
 
       if (!userData.success) return errorCB(userData.message)
       console.log(userData, " =getTargetUserAsync=")
 
-      set({ targetUser: { ...userData.data, banner: mediaData.data[0] } })
+      set({ targetUser: { ...userData.data, banner: mediaData.data} })
       successCB(userData.message)
     } finally {
       set({ isTargetUserLoading: false })

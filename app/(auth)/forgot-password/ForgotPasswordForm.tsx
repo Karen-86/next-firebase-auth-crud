@@ -4,25 +4,20 @@ import React, { useState, useEffect } from "react";
 import { useAuthActions } from "@/modules/auth/hooks/useAuthActions";
 import { ButtonDemo, InputDemo } from "@/components/index";
 import Link from "next/link";
-import useJoiValidation from "@/hooks/useJoiValidation";
 
-type ValidationResult = {
-  error?: {
-    details: {
-      path: string[];
-      message: string;
-    }[];
-  };
-};
+import { validateResetPassword } from '@/modules/auth/validation'
+import { ValidationResult } from "joi";
+import type { ResetPasswordData } from "@/modules/auth/types";
+
+
 
 const Login = () => {
   const { handleResetPassword } = useAuthActions();
-  const [state, setState] = useState({ email: "" });
+  const [state, setState] = useState<ResetPasswordData>({ email: "" });
   const [isLoading, setIsLoading] = useState(false);
 
-  const { validateResetPassword } = useJoiValidation();
   const [wasSubmitted, setWasSubmitted] = useState(false);
-  const [result, setResult] = useState<ValidationResult>({});
+  const [result, setResult] = useState<ValidationResult>();
   const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -3,14 +3,14 @@ import { db } from "@/lib/firebase/config/firebaseAdmin"
 
 type Props = {
   id: string
-  documentName: string
+  reqKey: string
   collectionName: string
   ignoreNotFound?: boolean
 }
 
 const loadResource = async ({
   id = "id",
-  documentName = "resource",
+  reqKey = "resource",
   collectionName = "",
   ignoreNotFound = false,
 }: Props) => {
@@ -19,18 +19,18 @@ const loadResource = async ({
   const resourceRef = db.collection(collectionName).doc(id)
   const resourceSnap = await resourceRef.get()
 
-  if (!resourceSnap.exists && !ignoreNotFound)
-    throw createError(`${documentName} not found`, 404)
+  if (!resourceSnap.exists) {
+    if (ignoreNotFound) return true
+    throw createError(`${reqKey} not found`, 404)
+  }
 
   const resourceData = { id: resourceSnap.id, ...resourceSnap.data() }
 
-  const req: any = resourceSnap.exists
-    ? {
-        resourceRef,
-        resourceSnap,
-        resourceData,
-      }
-    : {}
+  const req: any = {}
+
+  req[reqKey] = resourceData
+  req[reqKey + "Ref"] = resourceRef
+  req[reqKey + "Snap"] = resourceSnap
 
   return req
 }

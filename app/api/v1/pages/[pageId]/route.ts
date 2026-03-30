@@ -17,9 +17,9 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ page
     const decoded = await isAuthenticatedMiddleware(req);
 
     const { pageId } = await params;
-    const { resourceData: pageData } = await loadResourceMiddleware({
+    const { page } = await loadResourceMiddleware({
       id: pageId,
-      documentName: "page",
+      reqKey: "page",
       collectionName: "pages",
     });
 
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ page
       {
         success: true,
         message: "page found successfully",
-        data: pageData,
+        data: page,
       },
       { status: 200 },
     );
@@ -89,9 +89,9 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ pa
     const isAllowed = allowRolesMiddleware({ userRoles: user.roles, allowedRoles: ["admin", "superAdmin"] });
 
     const { pageId } = await params;
-    const { resourceRef: pageRef } = await loadResourceMiddleware({
+    const {  pageRef } = await loadResourceMiddleware({
       id: pageId,
-      documentName: "page",
+      reqKey: "page",
       collectionName: "pages",
     });
 

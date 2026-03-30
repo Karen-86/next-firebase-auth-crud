@@ -191,7 +191,12 @@ export const SettingsProfile = () => {
         </div>
         <hr className="my-4" />
         <div className="flex items-center justify-between gap-5 py-1">
-          <div className="font-semibold">Roles:</div>
+          <div className="font-semibold">Is email verified:</div>
+          <div className="font-medium capitalize">{authUser?.emailVerified ? "Yes" : "No"}</div>
+        </div>
+        <hr className="my-4" />
+        <div className="flex items-center justify-between gap-5 py-1">
+          <div className="font-semibold">Role(s):</div>
           <div className="font-medium capitalize">
             {roles?.map((role, index) => (
               <span key={index}>
@@ -200,11 +205,6 @@ export const SettingsProfile = () => {
               </span>
             )) || "—"}
           </div>
-        </div>
-        <hr className="my-4" />
-        <div className="flex items-center justify-between gap-5 py-1">
-          <div className="font-semibold">Is email verified:</div>
-          <div className="font-medium capitalize">{authUser?.emailVerified ? "Yes" : "No"}</div>
         </div>
         <hr className="my-4" />
         <div className="flex items-center justify-between gap-5 py-1">
