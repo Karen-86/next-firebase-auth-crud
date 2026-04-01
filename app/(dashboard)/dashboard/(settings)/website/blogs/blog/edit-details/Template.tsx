@@ -16,7 +16,7 @@ import DeleteBlogDialog from "./delete-blog-dialog/DeleteBlogDialog"
 import { initialValue } from "@/components/rich-text-editor/RichTextEditorDemo"
 import { Blog } from "@/modules/blogs/types"
 import { useBlogStore } from "@/modules/blogs/store"
-import {successAlert, errorAlert, warningAlert} from '@/lib/utils/alert'
+import { successAlert, errorAlert, warningAlert } from "@/lib/utils/alert"
 import { useAuthStore } from "@/modules/auth/store"
 
 const { placeholderImage } = LOCAL_DATA.images
@@ -26,12 +26,9 @@ const Template = () => {
   const isBlogsLoading = useBlogStore((s) => s.isBlogsLoading)
   const getBlogsAsync = useBlogStore((s) => s.getBlogsAsync)
 
+  const user = useAuthStore((s) => s.user)
 
-  const user = useAuthStore(s=>s.user)
-
-  const [filteredBlogs, setFilteredBlogs] = useState<{ [key: string]: any }[]>(
-    []
-  )
+  const [filteredBlogs, setFilteredBlogs] = useState<{ [key: string]: any }[]>([])
 
   useEffect(() => {
     getBlogsAsync()
@@ -78,24 +75,15 @@ const Template = () => {
                     <div className="flex w-full items-center gap-3">
                       <div className="flex items-center gap-1">
                         <span className="text-xs">Author:</span>
-                        <span className="text-xs text-gray-500">
-                          {blogItem.author}
-                        </span>
+                        <span className="text-xs text-gray-500">{blogItem.author}</span>
                       </div>
                       <div className="flex-1">
-                        <span className="text-dark min-w-[150px] truncate">
-                          {" "}
-                          {blogItem.title}
-                        </span>
+                        <span className="text-dark min-w-[150px] truncate"> {blogItem.title}</span>
                       </div>
-                      <div className="text-xs text-gray-500">
-                        {blogItem.slug}
-                      </div>{" "}
+                      <div className="text-xs text-gray-500">{blogItem.slug}</div>{" "}
                     </div>
                   ),
-                  content: (
-                    <BlogItem key={index} {...{ blogItem, filteredBlogs }} />
-                  ),
+                  content: <BlogItem key={index} {...{ blogItem, filteredBlogs }} />,
                 }
               })}
             />
@@ -177,25 +165,13 @@ const BlogItem = ({ blogItem = {}, filteredBlogs = [] }: any) => {
         fields: {
           ...(state.status !== blogItem.status ? { status: state.status } : {}),
           ...(slug !== blogItem.slug ? { slug: slug } : {}),
-          ...(state.metaTitle !== blogItem.metaTitle
-            ? { metaTitle: state.metaTitle }
-            : {}),
-          ...(state.metaDescription !== blogItem.metaDescription
-            ? { metaDescription: state.metaDescription }
-            : {}),
+          ...(state.metaTitle !== blogItem.metaTitle ? { metaTitle: state.metaTitle } : {}),
+          ...(state.metaDescription !== blogItem.metaDescription ? { metaDescription: state.metaDescription } : {}),
           ...(state.title !== blogItem.title ? { title: state.title } : {}),
-          ...(state.shortDescription !== blogItem.shortDescription
-            ? { shortDescription: state.shortDescription }
-            : {}),
-          ...(state.description !== blogItem.description
-            ? { description: state.description }
-            : {}),
-          ...(state.content !== blogItem.content
-            ? { content: state.content }
-            : {}),
-          ...(state.editorState !== blogItem.editorState
-            ? { editorState: JSON.stringify(state.editorState) }
-            : {}),
+          ...(state.shortDescription !== blogItem.shortDescription ? { shortDescription: state.shortDescription } : {}),
+          ...(state.description !== blogItem.description ? { description: state.description } : {}),
+          ...(state.content !== blogItem.content ? { content: state.content } : {}),
+          ...(state.editorState !== blogItem.editorState ? { editorState: JSON.stringify(state.editorState) } : {}),
           images: state.images,
         },
       })
@@ -206,9 +182,7 @@ const BlogItem = ({ blogItem = {}, filteredBlogs = [] }: any) => {
     // if blog-page document dont exist in firebase the input values may go from defined to undefined throwing error, so just add here "if(!Object.values(blogItem).length) return"
     const tempState = {
       ...blogItem,
-      editorState:
-        (blogItem.editorState && JSON.parse(blogItem.editorState)) ||
-        initialValue,
+      editorState: (blogItem.editorState && JSON.parse(blogItem.editorState)) || initialValue,
     }
     setState((prev) => ({ ...prev, ...tempState }))
   }, [blogItem])
@@ -278,24 +252,10 @@ const BlogItem = ({ blogItem = {}, filteredBlogs = [] }: any) => {
         />
         {state.images &&
           state.images.map((item: { [key: string]: string }) => {
-            return (
-              <UploadImageDemo
-                key={item.id}
-                {...item}
-                state={state}
-                setState={setState}
-              />
-            )
+            return <UploadImageDemo key={item.id} {...item} state={state} setState={setState} />
           })}
 
-        {state.editorState && (
-          <RichTextEditorDemo
-            state={state}
-            setState={setState}
-            className="mb-5"
-            label="Content"
-          />
-        )}
+        {state.editorState && <RichTextEditorDemo state={state} setState={setState} className="mb-5" label="Content" />}
 
         {/* {state.items &&
               state.items.map((item: { [key: string]: any }) => {
@@ -305,9 +265,7 @@ const BlogItem = ({ blogItem = {}, filteredBlogs = [] }: any) => {
           text={`${isBlogCreating ? "Creating..." : isBlogUpdating ? "Updating..." : blogItem.isNewBlog ? "Create" : "Update"} `}
           className={`w-full`}
           disabled={
-            (filteredBlogs.some(
-              (item: any) => item.slug == state.slug?.split(" ").join("-").trim()
-            ) &&
+            (filteredBlogs.some((item: any) => item.slug == state.slug?.split(" ").join("-").trim()) &&
               state.slug?.split(" ").join("-").trim() !== blogItem.slug) ||
             !state.slug ||
             isBlogCreating ||

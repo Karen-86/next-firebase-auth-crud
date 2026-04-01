@@ -1,4 +1,14 @@
-import request, { createHeaders } from "@/lib/api/client.js"
+import request, { createHeaders, urls, requestMiddleware } from "@/lib/api/client.js"
+
+// for custom api
+// import axios from "axios";
+
+// const api = axios.create({
+//   baseURL: urls.apiApp,
+//   withCredentials: true,
+// });
+
+// api.interceptors.request.use(requestMiddleware);
 
 export async function getBlogs({ userId, limit, sort, order }: any = {}) {
   let url = "/blogs"
@@ -16,6 +26,7 @@ export async function getBlogs({ userId, limit, sort, order }: any = {}) {
   const headers = createHeaders()
   return request({ url, method: "GET", headers })
 }
+
 export async function getBlog({ id }: any) {
   const url = `/blogs/${id}`
   const headers = createHeaders()
