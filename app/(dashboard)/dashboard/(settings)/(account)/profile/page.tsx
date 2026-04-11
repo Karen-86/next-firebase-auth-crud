@@ -23,10 +23,9 @@ const breadcrumbItems = [
 
 const Page = () => {
   return (
-    <main className="pages-page mb-[150px] p-5">
-      <h2 className="mb-3 text-2xl">Profile</h2>
+    <main className="pages-page mb-[150px] p-5 pt-1">
+      <h2 className="mb-1 text-2xl">Profile</h2>
       <BreadcrumbDemo items={breadcrumbItems} />
-      <br />
       <br />
       <SettingsProfile />
     </main>

@@ -19,10 +19,9 @@ const page = async () => {
   ];
 
   return (
-    <main className="about-section-page py-5 px-10">
-      <h2 className="text-2xl mb-3 capitalize">Hero section</h2>
+    <main className="about-section-page p-5 pt-1">
+      <h2 className="text-2xl mb-1 capitalize">Hero section</h2>
       <BreadcrumbDemo items={breadcrumbItems} />
-      <br />
       <br />
       <Template  />
     </main>

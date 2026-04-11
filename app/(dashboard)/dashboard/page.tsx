@@ -44,10 +44,9 @@ const Page = () => {
   }, [users])
 
   return (
-    <main className="dashboard-page p-5">
-      <h2 className="mb-3 text-2xl">Dashboard</h2>
+    <main className="dashboard-page p-5 pt-1">
+      <h2 className="mb-1 text-2xl">Dashboard</h2>
       <BreadcrumbDemo items={breadcrumbItems} />
-      <br />
       <br />
 
       <Card className="mb-37.5">

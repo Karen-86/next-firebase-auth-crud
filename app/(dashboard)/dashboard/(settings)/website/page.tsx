@@ -78,10 +78,9 @@ const blog = [
 
 const Pages = () => {
   return (
-    <main className="pages-page  p-5 mb-[150px] ">
-      <h2 className="text-2xl mb-3">Website</h2>
+    <main className="pages-page  p-5 pt-1 mb-[150px] ">
+      <h2 className="text-2xl mb-1">Website</h2>
       <BreadcrumbDemo items={breadcrumbItems} />
-      <br />
       <br />
       <Card className="relative">
         <CardHeader>

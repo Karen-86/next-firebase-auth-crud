@@ -44,11 +44,10 @@ const Page = () => {
   }
 
   return (
-    <main className="pages-page p-5">
+    <main className="pages-page p-5 pt-1">
       {/* <h2 className="text-2xl mb-3 capitalize">{fetchedUser.details.role}</h2> */}
-      <h2 className="text-2xl mb-3 capitalize">Profile</h2>
+      <h2 className="text-2xl mb-1 capitalize">Profile</h2>
       <BreadcrumbDemo items={breadcrumbItems} />
-      <br />
       <br />
       <Card className="mb-[150px] min-h-[500px] relative">
         <CardContent>

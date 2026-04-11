@@ -20,10 +20,9 @@ const Page = () => {
   const user = useAuthStore((s) => s.user)
 
   return (
-    <main className="pages-page p-5">
-      <h2 className="mb-3 text-2xl">My Profile</h2>
+    <main className="pages-page p-5 pt-1">
+      <h2 className="mb-1 text-2xl">My Profile</h2>
       <BreadcrumbDemo items={breadcrumbItems} />
-      <br />
       <br />
       <Card className="relative mb-[150px] min-h-[500px]">
         <CardContent>

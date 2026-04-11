@@ -230,7 +230,7 @@ export function DataTableDemo<TData extends IncludedProps, TValue>({ data, colum
               variant="outline"
             />
 
-            <span>
+            <span className="text-sm">
               Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
             </span>
 
