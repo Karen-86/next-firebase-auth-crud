@@ -14,13 +14,13 @@ const page = async () => {
       label: "Website",
     },
     {
-      label: `home page / metadata`,
+      label: `home`,
     },
   ];
 
   return (
     <main className="about-section-page p-5 pt-1">
-      <h2 className="text-2xl mb-1 capitalize">Hero section</h2>
+      <h2 className="text-2xl mb-1 capitalize">Metadata</h2>
       <BreadcrumbDemo items={breadcrumbItems} />
       <br />
       <Template  />

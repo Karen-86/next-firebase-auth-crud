@@ -14,7 +14,7 @@ const page = async () => {
       label: "Website",
     },
     {
-      label: `home page / hero Section`,
+      label: `home`,
     },
   ];
 

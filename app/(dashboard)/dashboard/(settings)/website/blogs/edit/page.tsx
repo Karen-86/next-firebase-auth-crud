@@ -16,13 +16,13 @@ const page = async ({ params }: { params: Promise<{ section: string }> }) => {
       label: "Website",
     },
     {
-      label: `blog page / details`,
+      label: `blogs`,
     },
   ];
 
   return (
     <main className="blog-section-page p-5 pt-1">
-      <h2 className="text-2xl mb-1 capitalize">Blog details</h2>
+      <h2 className="text-2xl mb-1 capitalize">Blogs List</h2>
       <BreadcrumbDemo items={breadcrumbItems} />
       <br />
       <Template  />

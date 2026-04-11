@@ -18,35 +18,35 @@ const sections = [
   {
     invoice: "1",
     name: "Metadata",
-    href: "/dashboard/website/home-page/edit-metadata",
+    href: "/dashboard/website/home/metadata/edit",
   },
   {
     invoice: "2",
     name: "Header",
-    href: "/dashboard/website/home-page/edit-header",
+    href: "/dashboard/website/home/header/edit",
     isDisabled: true,
   },
   {
     invoice: "3",
     name: "Hero",
-    href: "/dashboard/website/home-page/edit-hero-section",
+    href: "/dashboard/website/home/sections/hero/edit",
   },
   {
     invoice: "4",
     name: "Features",
-    href: "/dashboard/website/home-page/edit-features-section",
+    href: "/dashboard/website/home/sections/features/edit",
     isDisabled: true,
   },
   {
     invoice: "5",
     name: "Contact",
-    href: "/dashboard/website/home-page/edit-contact-section",
+    href: "/dashboard/website/home/sections/contact/edit",
     isDisabled: true,
   },
   {
     invoice: "6",
     name: "Footer",
-    href: "/dashboard/website/home-page/edit-footer",
+    href: "/dashboard/website/home/footer/edit",
     isDisabled: true,
   },
 ];
@@ -62,10 +62,10 @@ const blog = [
     invoice: "2",
     name: (
       <div>
-        Blog <span className="text-gray-500 text-xs"> (dynamic page, Metadata included)</span>
+        Blogs <span className="text-gray-500 text-xs"> (Metadata included)</span>
       </div>
     ),
-    href: "/dashboard/website/blogs/blog/edit-details",
+    href: "/dashboard/website/blogs/edit",
     isDisabled: false,
   },
   {
@@ -93,7 +93,7 @@ const Pages = () => {
 
       <Card className=" relative">
         <CardHeader>
-          <h2 className="text-1xl font-bold mb-3">Blog Page</h2>
+          <h2 className="text-1xl font-bold mb-3">Blogs Page</h2>
           <TableDemo invoices={blog} />
         </CardHeader>
       </Card>
