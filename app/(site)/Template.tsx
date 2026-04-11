@@ -12,8 +12,8 @@ export default function Template({ sectionData }: Props) {
   return (
     <main className="home-page">
       <HeroSection sectionData={sectionData} />
-      <AboutSection />
-      <ServicesSection />
+      {/* <AboutSection /> */}
+      {/* <ServicesSection /> */}
     </main>
   );
 }
@@ -25,7 +25,7 @@ const HeroSection = ({ sectionData }: Props) => {
 
   return (
     <section
-      className="pt-20! hero text-center sm:text-left  lg:min-h-[calc(100vh-80px)] flex items-center"
+      className="pt-20! hero text-center sm:text-left min-h-[calc(100vh-80px)] flex items-center"
       id="home-page"
     >
       <motion.div
@@ -35,11 +35,11 @@ const HeroSection = ({ sectionData }: Props) => {
       >
         <div className={`max-w-[490px] ${inView ? "lazy-animate" : ""}`} data-lazy="fade">
           <h4 className="sub-title mb-1 text-[18px] font-medium text-[#3e3e3e]">{title}</h4>
-          <h1 className="title text-3xl leading-[1.4]  md:text-5xl font-medium md:leading-[1.4] mb-10">
+          <h1 className="title text-3xl leading-[1.4]  md:text-5xl font-medium md:leading-[1.4]">
             {description}
           </h1>
         </div>
-        <div className={`avatar ${inView ? "lazy-animate" : ""} delay-300 max-w-[400px] w-full`} data-lazy="fade">
+        <div className={`avatar ${inView ? "lazy-animate" : ""} delay-300 max-w-[500px] w-full`} data-lazy="fade">
           {images?.length && (
             <img src={images[0].url} alt="avatar" className="w-full max-h-[300px] object-contain rounded-lg" />
           )}

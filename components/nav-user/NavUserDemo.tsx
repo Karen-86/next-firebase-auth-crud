@@ -41,9 +41,9 @@ export default function NavUserDemo({
 
   const handleCycleTheme = () => {
     if (theme === "light") setTheme("dark")
-    // else if (theme === "dark") setTheme("system");
-    // else setTheme("light");
-    else if (theme === "dark") setTheme("light")
+    else if (theme === "dark") setTheme("system");
+    else setTheme("light");
+    // else if (theme === "dark") setTheme("light")
   }
 
   useEffect(() => {
